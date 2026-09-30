@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>Коммерческое предложение — B2B-платформа запчастей для спецтехники</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -117,6 +118,12 @@ tr.total td{background:rgba(255,212,0,.06)!important;color:var(--txt);font-weigh
 .incl div:hover{border-color:#39424e}
 .incl div::before{content:"✓ ";color:var(--ok);font-family:var(--mono)}
 
+/* ===== опыт исполнителя ===== */
+.xp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.xp div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.xp b{display:block;font-family:var(--mono);font-size:24px;color:var(--acc)}
+.xp span{font-size:12.5px;color:var(--mut)}
+
 footer{border-top:1px solid var(--line);padding-top:24px;color:var(--mut);font-size:13.5px}
 footer .mono{font-size:12px;color:#54606c}
 
@@ -133,12 +140,14 @@ footer .mono{font-size:12px;color:#54606c}
   .parties{grid-template-columns:1fr;gap:14px}
   .plans{grid-template-columns:1fr}
   .incl{grid-template-columns:1fr}
+  .xp{grid-template-columns:1fr 1fr}
   table{font-size:13px;min-width:520px}
   th,td{padding:9px 10px}
 }
 @media(max-width:480px){
   body{font-size:14px}
   .facts{grid-template-columns:1fr}
+  .xp{grid-template-columns:1fr}
   .plan{padding:20px}
   .plan .sum{font-size:27px}
   h2{gap:9px}
@@ -151,12 +160,12 @@ footer .mono{font-size:12px;color:#54606c}
   body{background:#fff;color:#111}
   body::before,#side,#burger,#veil,#bar{display:none}
   .doc{margin:0;max-width:100%;padding:10px 0}
-  p,td,li,.parties span,footer,.incl div,.facts span,.plan .split{color:#333}
+  p,td,li,.parties span,footer,.incl div,.facts span,.plan .split,.xp span{color:#333}
   th{background:#f4f4f4;color:#111}
   th,td{border-color:#ccc}
-  .tbl,.plan,.incl div,.facts div{background:#fff;border-color:#ccc}
+  .tbl,.plan,.incl div,.facts div,.xp div{background:#fff;border-color:#ccc}
   .plan.hot{background:#fff;border:1px solid #b58900}
-  .plan li,.plan .tag,h1,h2,.plan .sum,td.price,.facts b,tr.total td{color:#111}
+  .plan li,.plan .tag,h1,h2,.plan .sum,td.price,.facts b,.xp b,tr.total td{color:#111}
   h2 .n,.hl,.plan .term,a,.note b,.payline{color:#b58900}
   .note{background:#fffbe6;border-color:#e0c400}
   tr.total td{background:#fffbe6!important}
@@ -186,6 +195,7 @@ footer .mono{font-size:12px;color:#54606c}
     <a href="#s7"><i>7</i>Поддержка и сопровождение</a>
     <a href="#s8"><i>8</i>Коммерческие условия</a>
     <a href="#s9"><i>9</i>Порядок принятия предложения</a>
+    <a href="#s10"><i>10</i>Об исполнителе</a>
   </nav>
   <div class="side-foot">
     <button id="printbtn">Печать / PDF</button>
@@ -204,7 +214,6 @@ footer .mono{font-size:12px;color:#54606c}
     <div><b>3 этапа</b><span>оплата частями через гаранта</span></div>
   </div>
   <div class="payline">оплата по этапам через гаранта любого известного форума по выбору заказчика</div>
-
 </header>
 
 <section id="s1">
@@ -375,11 +384,38 @@ footer .mono{font-size:12px;color:#54606c}
     <li>Исполнитель разворачивает тестовый стенд и начинает работы в течение 2 рабочих дней.</li>
     <li>Еженедельные демонстрации; приёмка этапа освобождает оплату и открывает следующий этап.</li>
   </ol>
+</section>
 
+<section id="s10">
+  <h2><span class="n">10</span>Об исполнителе</h2>
+  <p>Fullstack-разработчик, 20 лет коммерческой разработки. Веду проект лично от первой строки кода до релиза и несу единоличную ответственность за весь контур платформы: от схемы базы данных до пикселя в интерфейсе. Без субподряда и передачи задач между командами.</p>
+  <div class="xp">
+    <div><b>20 лет</b><span>коммерческой разработки</span></div>
+    <div><b>70+</b><span>проектов доведено до релиза</span></div>
+    <div><b>15</b><span>B2B-платформ и маркетплейсов</span></div>
+    <div><b>1</b><span>точка ответственности за весь стек</span></div>
+  </div>
+  <div class="tbl"><div class="tscroll">
+  <table>
+    <thead><tr><th>Направление</th><th>Опыт и инструменты</th></tr></thead>
+    <tbody>
+      <tr><td>Бэкенд</td><td>PHP от 5.x до 8.4: 1С-Битрикс, Laravel, Symfony; Node.js и TypeScript: NestJS, Express; REST и GraphQL API, очереди, микросервисная архитектура</td></tr>
+      <tr><td>Фронтенд</td><td>JavaScript и TypeScript, React, Next.js, Vue и Nuxt; SPA и SSR-приложения, дизайн-системы, оптимизация производительности интерфейсов</td></tr>
+      <tr><td>Данные и нагрузки</td><td>MySQL и PostgreSQL: проектирование схем, оптимизация запросов, объёмы в миллионы записей; миграции без остановки бизнеса</td></tr>
+      <tr><td>Инфраструктура</td><td>Linux, nginx, Docker, CI/CD, мониторинг; серверы и облака под ключ, резервирование и отказоустойчивость</td></tr>
+      <tr><td>Интеграции</td><td>Платёжные системы Stripe, PayPal, ЮKassa; 1С, CRM, телефония, почтовые и SMS-сервисы, сторонние API</td></tr>
+      <tr><td>Legacy и аудит</td><td>Технический аудит мёртвых систем, восстановление из повреждённых резервных копий, переезды со старых CMS без остановки бизнес-процессов. Ровно тот случай, что описан в разделе 1</td></tr>
+    </tbody>
+  </table>
+  </div></div>
+  <p>Стиль работы: еженедельные демонстрации живого функционала, код в репозитории заказчика с первого дня, ИИ-ускоренная разработка с обязательным ревью каждого решения человеком. Скорость команды из трёх при ответственности одного владельца.</p>
+  <div class="note"><b>Принцип.</b> Заказчик общается напрямую с человеком, который пишет код и отвечает за результат, а не с менеджером, передающим требования по цепочке.</div>
+  <p class="mono" style="font-size:12px;color:#54606c">код и открытые проекты: github.com/HighSeek · связь: [telegram, email]</p>
 </section>
 
 <footer>
-
+  <p>Коммерческое предложение № SP-2026-01 от 29.09.2026, действительно до 31.10.2026.</p>
+  <p class="mono">оплата по этапам через гаранта · исполнителем является лицо, указанное в разделе 10</p>
 </footer>
 
 </main>
