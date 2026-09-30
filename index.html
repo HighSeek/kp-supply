@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческое предложение — B2B-платформа запчастей для спецтехники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10; --panel:#12161c; --panel2:#0e1217; --line:#242b34;
+  --txt:#e9eef3; --mut:#8fa3b0; --acc:#ffd400; --ok:#00e5a0;
+  --mono:'JetBrains Mono',monospace; --sans:'Manrope',system-ui,sans-serif;
+  --sw:272px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(800px 420px at 90% -10%, rgba(255,212,0,.06), transparent 60%),
+    radial-gradient(600px 420px at -10% 110%, rgba(0,229,160,.05), transparent 60%),
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:auto,auto,52px 52px,52px 52px;}
+::selection{background:var(--acc);color:#0b0d10}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#242b34;border-radius:99px}
+::-webkit-scrollbar-track{background:transparent}
+a{color:var(--acc);text-decoration:none}
+.mono{font-family:var(--mono)}
+
+#bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--acc),var(--ok));width:0;z-index:70}
+
+/* ===== сайдбар ===== */
+#side{position:fixed;top:0;left:0;bottom:0;width:var(--sw);z-index:50;
+  background:linear-gradient(180deg,#12161c 0%,#0d1116 100%);
+  border-right:1px solid var(--line);display:flex;flex-direction:column;padding:22px 16px 18px}
+.side-head{display:flex;flex-direction:column;gap:2px;padding:0 10px}
+.side-head .num{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--acc);text-transform:uppercase}
+.side-head .date{font-family:var(--mono);font-size:11px;color:#54606c}
+.side-title{padding:12px 10px 14px;border-bottom:1px solid var(--line);font-weight:800;font-size:15px;line-height:1.35;letter-spacing:-.01em}
+.side-title span{color:var(--acc)}
+#snav{flex:1;overflow-y:auto;margin:14px 0;display:flex;flex-direction:column;gap:2px;scrollbar-width:thin}
+#snav a{display:flex;gap:10px;align-items:baseline;padding:8px 10px;border-radius:9px;color:var(--mut);font-size:13px;line-height:1.4;border-left:2px solid transparent;transition:background .2s,color .2s}
+#snav a i{font-family:var(--mono);font-style:normal;font-size:11px;color:#54606c;min-width:14px}
+#snav a:hover{color:var(--txt);background:rgba(255,255,255,.04)}
+#snav a.active{color:var(--txt);background:rgba(255,212,0,.09);border-left-color:var(--acc)}
+#snav a.active i{color:var(--acc)}
+.side-foot{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:10px}
+#printbtn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--acc);color:#0b0d10;border:none;border-radius:10px;padding:11px 12px;cursor:pointer;font-weight:700;transition:filter .2s}
+#printbtn:hover{filter:brightness(1.1)}
+.side-foot .tiny{font-family:var(--mono);font-size:10.5px;color:#54606c;line-height:1.5}
+
+#burger{display:none;position:fixed;top:12px;left:12px;z-index:60;width:44px;height:44px;border-radius:12px;
+  border:1px solid var(--line);background:rgba(18,22,28,.9);backdrop-filter:blur(8px);color:var(--txt);font-size:19px;cursor:pointer;align-items:center;justify-content:center}
+#veil{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:45}
+body.nav #veil{display:block}
+
+/* ===== документ ===== */
+.doc{position:relative;z-index:1;margin-left:var(--sw);max-width:940px;padding:52px 38px 90px}
+header.top{border-bottom:2px solid var(--acc);padding-bottom:28px;margin-bottom:40px}
+.docnum{font-family:var(--mono);font-size:12px;color:var(--mut);letter-spacing:.16em;text-transform:uppercase}
+h1{font-size:clamp(25px,3.6vw,42px);font-weight:800;line-height:1.12;margin:14px 0 12px;letter-spacing:-.015em}
+h1 .hl{color:var(--acc)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 4px}
+.facts div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.facts b{display:block;font-family:var(--mono);font-size:20px;color:var(--acc);font-weight:700}
+.facts span{font-size:12.5px;color:var(--mut)}
+.payline{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--ok)}
+.payline::before{content:"● ";font-size:9px;vertical-align:2px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px;font-size:14px}
+.parties b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--acc);text-transform:uppercase;margin-bottom:6px}
+.parties span{color:var(--mut)}
+
+section{margin-bottom:56px;scroll-margin-top:34px}
+h2{font-size:clamp(20px,2.6vw,26px);font-weight:800;margin-bottom:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+h2 .n{font-family:var(--mono);font-size:13px;font-weight:700;color:#0b0d10;background:var(--acc);border-radius:8px;padding:4px 9px;flex:none}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+p{color:var(--mut);margin-bottom:12px}
+p strong,li strong{color:var(--txt)}
+ul.doc,ol.doc{margin:0 0 14px 20px;color:var(--mut)}
+ul.doc li,ol.doc li{margin:7px 0}
+.hl{color:var(--acc)}
+.note{background:rgba(255,212,0,.06);border:1px solid rgba(255,212,0,.35);border-left:3px solid var(--acc);border-radius:12px;padding:16px 20px;margin:18px 0;color:var(--txt);font-size:14px}
+.note b{color:var(--acc)}
+
+.tbl{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:16px 0;background:var(--panel2)}
+.tscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{border-bottom:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt);background:var(--panel)}
+td{color:var(--mut)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+td.price{color:var(--txt);font-weight:800;white-space:nowrap}
+tr.total td{background:rgba(255,212,0,.06)!important;color:var(--txt);font-weight:800}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.plan:hover{transform:translateY(-4px);border-color:#39424e}
+.plan.hot{border:1px solid transparent;
+  background:linear-gradient(var(--panel),var(--panel)) padding-box,
+             linear-gradient(135deg,var(--acc),var(--ok)) border-box}
+.plan .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.plan .sum{font-size:32px;font-weight:800;margin:10px 0 2px;letter-spacing:-.02em}
+.plan .term{font-family:var(--mono);font-size:12px;color:var(--acc);margin-bottom:6px}
+.plan .split{font-family:var(--mono);font-size:11px;color:var(--mut);margin-bottom:14px}
+.plan ul{list-style:none;margin-top:4px}
+.plan li{padding:7px 0 7px 22px;position:relative;color:var(--mut);font-size:13.5px;line-height:1.5;border-top:1px dashed rgba(255,255,255,.07)}
+.plan li::before{content:"✓";position:absolute;left:2px;color:var(--ok);font-family:var(--mono)}
+.badge{display:inline-block;background:var(--acc);color:#0b0d10;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:99px;margin-bottom:10px;letter-spacing:.1em}
+
+.incl{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.incl div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--mut);font-size:13.5px;transition:border-color .25s}
+.incl div:hover{border-color:#39424e}
+.incl div::before{content:"✓ ";color:var(--ok);font-family:var(--mono)}
+
+footer{border-top:1px solid var(--line);padding-top:24px;color:var(--mut);font-size:13.5px}
+footer .mono{font-size:12px;color:#54606c}
+
+/* ===== мобильные ===== */
+@media(max-width:960px){
+  #side{transform:translateX(-100%);transition:transform .3s ease;width:288px}
+  body.nav #side{transform:none}
+  #burger{display:flex}
+  .doc{margin-left:0;padding:70px 18px 70px}
+  section{scroll-margin-top:20px}
+}
+@media(max-width:860px){
+  .facts{grid-template-columns:1fr 1fr}
+  .parties{grid-template-columns:1fr;gap:14px}
+  .plans{grid-template-columns:1fr}
+  .incl{grid-template-columns:1fr}
+  table{font-size:13px;min-width:520px}
+  th,td{padding:9px 10px}
+}
+@media(max-width:480px){
+  body{font-size:14px}
+  .facts{grid-template-columns:1fr}
+  .plan{padding:20px}
+  .plan .sum{font-size:27px}
+  h2{gap:9px}
+  h2 .n{padding:3px 7px;font-size:12px}
+  .doc{padding:66px 14px 60px}
+}
+
+/* ===== печать ===== */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,#side,#burger,#veil,#bar{display:none}
+  .doc{margin:0;max-width:100%;padding:10px 0}
+  p,td,li,.parties span,footer,.incl div,.facts span,.plan .split{color:#333}
+  th{background:#f4f4f4;color:#111}
+  th,td{border-color:#ccc}
+  .tbl,.plan,.incl div,.facts div{background:#fff;border-color:#ccc}
+  .plan.hot{background:#fff;border:1px solid #b58900}
+  .plan li,.plan .tag,h1,h2,.plan .sum,td.price,.facts b,tr.total td{color:#111}
+  h2 .n,.hl,.plan .term,a,.note b,.payline{color:#b58900}
+  .note{background:#fffbe6;border-color:#e0c400}
+  tr.total td{background:#fffbe6!important}
+  section{margin-bottom:34px}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<button id="burger" aria-label="Меню">☰</button>
+<div id="veil"></div>
+
+<aside id="side">
+  <div class="side-head">
+    <span class="num">КП № SP-2026-01</span>
+    <span class="date">от 29.09.2026</span>
+  </div>
+  <div class="side-title">B2B-платформа запчастей <span>для спецтехники</span></div>
+  <nav id="snav">
+    <a href="#s1"><i>1</i>Назначение предложения</a>
+    <a href="#s2"><i>2</i>Описание продукта</a>
+    <a href="#s3"><i>3</i>Пакеты работ и стоимость</a>
+    <a href="#s4"><i>4</i>Входит во все пакеты</a>
+    <a href="#s5"><i>5</i>Этапы и порядок оплаты</a>
+    <a href="#s6"><i>6</i>Технические решения</a>
+    <a href="#s7"><i>7</i>Поддержка и сопровождение</a>
+    <a href="#s8"><i>8</i>Коммерческие условия</a>
+    <a href="#s9"><i>9</i>Порядок принятия предложения</a>
+  </nav>
+  <div class="side-foot">
+    <button id="printbtn">Печать / PDF</button>
+    <span class="tiny">Оплата по этапам через гаранта. Предложение действительно до 31.10.2026</span>
+  </div>
+</aside>
+
+<main class="doc">
+
+<header class="top">
+  <div class="docnum">Коммерческое предложение № SP-2026-01 от 29.09.2026</div>
+  <h1>Разработка B2B-платформы поиска и покупки запчастей <span class="hl">для спецтехники</span></h1>
+  <div class="facts">
+    <div><b>от $3 500</b><span>стоимость пакета внедрения</span></div>
+    <div><b>1,5–3 нед.</b><span>срок от старта до релиза пакета</span></div>
+    <div><b>3 этапа</b><span>оплата частями через гаранта</span></div>
+  </div>
+  <div class="payline">оплата по этапам через гаранта любого известного форума по выбору заказчика</div>
+  <div class="parties">
+    <div><b>Заказчик</b><span>[Наименование компании, контактное лицо]</span></div>
+    <div><b>Исполнитель</b><span>[Имя / ник на форуме, telegram, email]</span></div>
+  </div>
+</header>
+
+<section id="s1">
+  <h2><span class="n">1</span>Назначение предложения</h2>
+  <p>Настоящее предложение описывает состав, стоимость и порядок работ по созданию веб-платформы, объединяющей покупателей и поставщиков запчастей для спецтехники по модели запроса котировок (RFQ): покупатель размещает заявку на запчасти, проверенные поставщики отвечают котировками, сделка завершается внутри платформы.</p>
+  <p>Платформа создаётся с нуля на современном стеке и заменяет собой эксплуатацию устаревшего сайта 2018 года, восстановление которого технически нецелесообразно: резервные копии повреждены, ядро требует платных лицензий и обновлений, стоимость часа специалиста по legacy-системе выше рыночной.</p>
+</section>
+
+<section id="s2">
+  <h2><span class="n">2</span>Описание продукта</h2>
+  <p>В платформе три роли и публичный контур:</p>
+  <ul class="doc">
+    <li><strong>Покупатель:</strong> регистрация, создание заявок с позициями по каталожному номеру (наименование и модель подтягиваются из каталога), лента своих заявок, получение и сравнение котировок, чат с поставщиком.</li>
+    <li><strong>Поставщик:</strong> регистрация компании с прохождением проверки, профиль с адресами офиса и склада, контактами и ответственным лицом, лента заявок с фильтрами по марке и региону, котировки по позициям, загрузка прайс-листов, генератор инвойсов.</li>
+    <li><strong>Администратор:</strong> модерация поставщиков со статусом «на проверке», справочники брендов, моделей и запчастей, управление контентом и тарифами.</li>
+    <li><strong>Публичные страницы:</strong> главная с ключевым отличием сервиса (проверка всех поставщиков), общий каталог поставщиков с меткой «проверен», новостной блок брендов (Caterpillar, Komatsu, Sandvik и др.), страница правил, контакты.</li>
+  </ul>
+  <div class="note"><b>Монетизация.</b> Модель платных подписок поставщиков находится на стороне заказчика в стадии обсуждения. Во всех пакетах реализуется заглушка: тарифная сетка на сайте и ручное управление подписками в админ-панели. Подключение онлайн-платежей оценивается и подключается отдельным этапом после утверждения модели монетизации.</div>
+</section>
+
+<section id="s3">
+  <h2><span class="n">3</span>Пакеты работ и стоимость</h2>
+  <div class="plans">
+    <div class="plan">
+      <span class="tag">Пакет 1 · Старт</span>
+      <div class="sum">$3 500</div>
+      <div class="term">срок 1,5–2 недели</div>
+      <div class="split">оплата: $1 400 / $1 400 / $700 по этапам</div>
+      <ul>
+        <li>Регистрация и роли: покупатель, поставщик, админ</li>
+        <li>Модерация поставщиков со статусом «на проверке»</li>
+        <li>Заявки RFQ с позициями, котировки, чаты</li>
+        <li>Кабинеты покупателя и поставщика</li>
+        <li>Профиль поставщика: адреса, контакты, ответственное лицо</li>
+        <li>Генератор инвойсов PDF</li>
+        <li>Подбор запчасти по каталожному номеру: базовый справочник с автокомплитом</li>
+        <li>Новостной блок брендов на главной</li>
+        <li>Публичные страницы: главная с УТП, каталог поставщиков с меткой «проверен», правила</li>
+        <li>Админ-панель: пользователи, справочники, контент</li>
+        <li>Подписки: заглушка с ручным управлением тарифами</li>
+        <li>Email-уведомления и деплой на сервер заказчика</li>
+      </ul>
+    </div>
+    <div class="plan hot">
+      <span class="badge">Рекомендуемый</span>
+      <span class="tag">Пакет 2 · База</span>
+      <div class="sum">$4 000</div>
+      <div class="term">срок 2–2,5 недели</div>
+      <div class="split">оплата: $1 600 / $1 600 / $800 по этапам</div>
+      <ul>
+        <li>Все возможности пакета «Старт»</li>
+        <li>Импорт приобретённых каталогов запчастей</li>
+        <li>Нечёткий поиск по номеру Meilisearch: опечатки, частичные совпадения</li>
+        <li>Прайс-листы поставщиков Excel и CSV, автоподстановка цен в котировки</li>
+        <li>Инвойсы: экспорт Excel, брендирование, автозаполнение из котировки</li>
+        <li>Второй язык интерфейса</li>
+        <li>SEO-контур: SSR, sitemap, мета-разметка, микроданные</li>
+        <li>Аналитика в админ-панели: заявки, котировки, конверсия</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <span class="tag">Пакет 3 · Полный</span>
+      <div class="sum">$6 500</div>
+      <div class="term">срок до 3 недель</div>
+      <div class="split">оплата: $2 600 / $2 600 / $1 300 по этапам</div>
+      <ul>
+        <li>Все возможности пакета «База»</li>
+        <li>API для поставщиков: приём заявок, подача котировок</li>
+        <li>Авто-котировки по загруженному прайс-листу</li>
+        <li>ИИ-модули: разбор свободных заявок и писем в позиции, кросс-референсы аналогов</li>
+        <li>Рейтинги и отзывы поставщиков</li>
+        <li>Мобильная версия (PWA)</li>
+        <li>Нагрузочное тестирование и базовый аудит безопасности</li>
+      </ul>
+    </div>
+  </div>
+  <p>Каждый следующий пакет включает все возможности предыдущего. Допустим старт с пакета «Старт» и последующий апгрейд с зачётом оплаченной суммы.</p>
+</section>
+
+<section id="s4">
+  <h2><span class="n">4</span>Входит во все пакеты</h2>
+  <p>Независимо от выбранного пакета, в стоимость уже включено:</p>
+  <div class="incl">
+    <div>Деплой и настройка на сервере заказчика</div>
+    <div>Тестовый стенд с доступом компании с первой недели</div>
+    <div>Демонстрация функционала каждую неделю</div>
+    <div>Репозиторий с доступом на чтение с первого дня, полная передача после оплаты пакета</div>
+    <div>Гарантия 30 дней после приёмки пакета</div>
+    <div>Конфиденциальность: условия и передача данных фиксируются в сделке под гарантом</div>
+  </div>
+  <p>Подробный состав каждого пакета приведён в разделе 3. Пакеты отличаются глубиной автоматизации и интеграций, а не наличием базового продукта: даже за $3 500 заказчик получает работающую платформу со всеми ключевыми сценариями из технического задания.</p>
+</section>
+
+<section id="s5">
+  <h2><span class="n">5</span>Этапы и порядок оплаты</h2>
+  <p>Работы по любому пакету делятся на три этапа. Оплата каждого этапа проходит через гаранта: заказчик выбирает любой известный и уважаемый форум с услугой гарантирования сделок, открывает сделку и вносит сумму этапа до его старта. После демонстрации и приёмки этапа гарант переводит средства исполнителю, и начинается следующий этап.</p>
+  <div class="tbl"><div class="tscroll">
+  <table>
+    <thead><tr><th>Этап</th><th>Содержание</th><th>Старт</th><th>База</th><th>Полный</th></tr></thead>
+    <tbody>
+      <tr><td class="price">1 · каркас</td><td>Роли, авторизация, модерация, заготовки кабинетов, тестовый стенд</td><td class="price">$1 400</td><td class="price">$1 600</td><td class="price">$2 600</td></tr>
+      <tr><td class="price">2 · сценарии</td><td>Заявки, котировки, чаты, публичные страницы, основной функционал пакета</td><td class="price">$1 400</td><td class="price">$1 600</td><td class="price">$2 600</td></tr>
+      <tr><td class="price">3 · релиз</td><td>Оставшийся функционал пакета, нагрузочный прогон, релиз, передача доступов</td><td class="price">$700</td><td class="price">$800</td><td class="price">$1 300</td></tr>
+      <tr class="total"><td>Итого</td><td>Полный пакет под ключ</td><td class="price">$3 500</td><td class="price">$4 000</td><td class="price">$6 500</td></tr>
+    </tbody>
+  </table>
+  </div></div>
+  <ul class="doc">
+    <li>Старт этапа: в течение 2 рабочих дней после внесения суммы этапа под гарант.</li>
+    <li>Работа ведётся спринтами с демонстрацией функционала в конце каждой недели.</li>
+    <li>Приёмка этапа: онлайн-демонстрация по списку из приложения к сделке; после подтверждения заказчиком гарант освобождает оплату.</li>
+    <li>Сроки пакетов указаны в разделе 3; изменение объёма по инициативе заказчика согласуется в сделке с пересчётом суммы и срока этапа.</li>
+  </ul>
+</section>
+
+<section id="s6">
+  <h2><span class="n">6</span>Технические решения</h2>
+  <div class="tbl"><div class="tscroll">
+  <table>
+    <thead><tr><th>Компонент</th><th>Решение</th><th>Обоснование</th></tr></thead>
+    <tbody>
+      <tr><td>Серверная часть</td><td>NestJS, TypeScript, PostgreSQL 16</td><td>Промышленный стандарт для B2B-платформ; типизация снижает стоимость поддержки</td></tr>
+      <tr><td>Фронтенд и кабинеты</td><td>Next.js (React), серверный рендеринг</td><td>Быстрые страницы и корректная индексация поисковиками</td></tr>
+      <tr><td>Админ-панель</td><td>React, Refine</td><td>Модерация и справочники без лишних затрат на разработку</td></tr>
+      <tr><td>Поиск по каталожным номерам</td><td>Meilisearch</td><td>Автокомплит и устойчивость к опечаткам в номерах</td></tr>
+      <tr><td>Чаты и уведомления</td><td>WebSocket, очереди на Redis</td><td>Реальное время без сторонних платных сервисов</td></tr>
+      <tr><td>Инфраструктура</td><td>Docker, CI/CD, сервер заказчика</td><td>Деплой одной командой, воспроизводимость окружения</td></tr>
+      <tr><td>Разработка</td><td>ИИ-ассистенты под контролем разработчика</td><td>Сокращение сроков примерно вдвое без потери качества кода</td></tr>
+    </tbody>
+  </table>
+  </div></div>
+  <p>Платформа не использует платное CMS-ядро: отсутствуют лицензионные отчисления и зависимость от вендора. Каталоги запчастей импортируются исключительно из файлов, приобретённых заказчиком легально; сбор данных с третьих площадок не выполняется.</p>
+</section>
+
+<section id="s7">
+  <h2><span class="n">7</span>Поддержка и сопровождение</h2>
+  <div class="tbl"><div class="tscroll">
+  <table>
+    <thead><tr><th>Тариф</th><th>Состав</th><th>Стоимость</th></tr></thead>
+    <tbody>
+      <tr><td class="price">Start</td><td>Мониторинг, резервные копии, обновления безопасности, до 4 часов правок в месяц, реакция в рабочий день</td><td class="price">$300/мес</td></tr>
+      <tr><td class="price">Business</td><td>Всё из Start, до 12 часов разработки в месяц, приоритетная реакция, ежемесячный отчёт</td><td class="price">$700/мес</td></tr>
+      <tr><td class="price">Partner</td><td>Всё из Business, до 30 часов разработки в месяц, SLA реакции 4 рабочих часа, личный канал связи, планирование квартала</td><td class="price">$1 500/мес</td></tr>
+    </tbody>
+  </table>
+  </div></div>
+  <p>Работы вне тарифа: $45/час. Первые 30 дней после приёмки пакета исправление ошибок выполняется бесплатно независимо от тарифа поддержки. Оплата поддержки также может проходить через гаранта помесячно.</p>
+</section>
+
+<section id="s8">
+  <h2><span class="n">8</span>Коммерческие условия</h2>
+  <ul class="doc">
+    <li>Цены фиксированные по пакетам и не изменяются после согласования объёма в сделке.</li>
+    <li>Расчёты исключительно через гаранта: исполнитель не начинает этап без внесённой под гарантию суммы, заказчик не платит за непринятый этап. Выбор площадки гаранта: любой известный и уважаемый форум по договорённости сторон.</li>
+    <li>Репозиторий создаётся на старте, заказчик имеет доступ на чтение с первого дня; полная передача кода, домена и доступов после оплаты последнего этапа пакета.</li>
+    <li>Гарантийный период на каждый пакет: 30 дней после приёмки.</li>
+    <li>Конфиденциальность данных компании фиксируется условиями сделки под гарантом.</li>
+    <li>Предложение действительно до 31.10.2026.</li>
+  </ul>
+</section>
+
+<section id="s9">
+  <h2><span class="n">9</span>Порядок принятия предложения</h2>
+  <ol class="doc">
+    <li>Заказчик выбирает пакет работ и тариф поддержки в переписке или теме сделки.</li>
+    <li>Стороны согласуют объём, список экранов и функций по этапам, выбирают площадку гаранта.</li>
+    <li>Заказчик открывает сделку под гарантом и вносит сумму первого этапа.</li>
+    <li>Исполнитель разворачивает тестовый стенд и начинает работы в течение 2 рабочих дней.</li>
+    <li>Еженедельные демонстрации; приёмка этапа освобождает оплату и открывает следующий этап.</li>
+  </ol>
+  <p>Вопросы и уточнения по предложению: <span class="hl mono">[telegram / email / ник на форуме]</span>.</p>
+</section>
+
+<footer>
+  <p>Исполнитель: [Имя / ник на форуме, telegram, email]. Коммерческое предложение № SP-2026-01 от 29.09.2026, действительно до 31.10.2026.</p>
+  <p class="mono">сформировано 29.09.2026 · оплата по этапам через гаранта</p>
+</footer>
+
+</main>
+
+<script>
+const burger=document.getElementById('burger'),veil=document.getElementById('veil');
+burger.onclick=()=>document.body.classList.toggle('nav');
+veil.onclick=()=>document.body.classList.remove('nav');
+const links=[...document.querySelectorAll('#snav a')];
+links.forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=960)document.body.classList.remove('nav')}));
+document.getElementById('printbtn').onclick=()=>window.print();
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const bar=document.getElementById('bar');
+function onScroll(){
+  const y=scrollY+140;
+  let idx=0;
+  secs.forEach((s,i)=>{if(s&&s.offsetTop<=y)idx=i});
+  links.forEach((a,i)=>a.classList.toggle('active',i===idx));
+  const h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.width=(h>0?(scrollY/h)*100:0)+'%';
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',onScroll);
+onScroll();
+</script>
+</body>
+</html>
